@@ -127,7 +127,9 @@ class Printer extends EventEmitter {
     });
 
     if (html) {
-      await page.setContent(html);
+      await page.setContent(html, {
+        waitUntil: ['domcontentloaded', 'networkidle0']
+      });
 
       if (url) {
         await page.evaluate((url) => {
